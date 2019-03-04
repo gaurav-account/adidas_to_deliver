@@ -116,12 +116,14 @@ http://192.168.99.100:8085/shortestTime(when using docker)
 POST API
 
 Sample request:
+
 {
     "originCity": "Delhi",
     "destinyCity": "Chennai"
 }
 
 Sample Response:
+
 {
     "path": [
         "Delhi",
@@ -136,6 +138,9 @@ Sample Response:
 http://192.168.99.100:8085/shortestConnection (when using docker)
 
 POST API
+
+Sample request:
+
 {
     "originCity": "Delhi",
     "destinyCity": "Kolkata"
@@ -143,6 +148,7 @@ POST API
 
 
 Sample Response:
+
 {
     "path": [
         "Delhi",
@@ -161,6 +167,7 @@ http://192.168.99.100:8090/airlines (when using docker)
 GET API
 
 Sample Response:  
+
 [
     {
         "id": 1,
