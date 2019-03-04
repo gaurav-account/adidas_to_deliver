@@ -1,9 +1,14 @@
 Adidas Coding Exercise
+----------------------
 
 Introduction
+------------
 
-We want to create a service that given an origin city will return a list of itineraries , one based in the less number of connections and the second based in the less time.
+I have created a service that given an origin city & destiny city, will return a list of itineraries. One based in the less number of connections and the second based in the less time.
+
 The solution has following modules:
+-----------------------------------
+
 1. config-service
 	It maintains the configuration of all modules.
 	Spring Cloud Config provides server and client-side support for externalized configuration in a distributed system. 
@@ -11,7 +16,7 @@ The solution has following modules:
 	
 2. eureka-server
 	Eureka Server is an application that holds the information about all client-service applications. 
-	Every Micro service will register into the Eureka server and Eureka server knows all the client applications running on each port and IP address. 
+	Every Micro service will register into the Eureka server and Eureka server knows all the client applications running on each             port and IP address. 
 	Eureka Server is also known as Discovery Server.
 	In our scenario this eurkea-server has two client airline-data-service and airline-business-service.
 	
@@ -24,20 +29,22 @@ The solution has following modules:
 	It consume the airline-data-service API in order to calculate the sortest way( in time and in
 	connections ) to travel from one city to another , independent of the departure time.
 	Have used SimpleDirectedWeightedGraph of JGraphT and Bellman-Ford algorithm to get the shortest path.
-	JGraphT is an open-source Java class library which provides us with various types of graphs and also many useful algorithms for solving most frequently encountered graph problems.
+	JGraphT is an open-source Java class library which provides us with various types of graphs and also many useful algorithms for         solving most frequently encountered graph problems.
 	It has following two APIs
 		i)/shortestTime
 		ii)/shortestConnection
 5. mysql-database
 	mysql database service.
 
-Steps to execute the application
+Steps to run the application
+--------------------------------
 
 Build Project
-
+-------------
 mvn clean install -DskipTests=true
  
-Build containers using docker command:
+Build containers using docker command
+-------------------------------------
 
 docker build -t adidas/config-service:1.0.0 ./config-service
 docker build -t adidas/eureka-server:1.0.0 ./eureka-server
@@ -47,10 +54,11 @@ docker build -t mysql-database ./mysql-database
 
 
 Execute docker-compose.yml
-
+--------------------------
 docker-compose up --no-start
 
 Start containers in sequence
+----------------------------
 
 docker start -a config-service    
 docker start -a eureka-server
@@ -67,19 +75,26 @@ Prior to testing with docker containers I have tested by running each microservi
 4. AirlineBusinessServiceApplication.java(airline-business-service)
 
 URLs of the Application:
+------------------------
 Swagger:
+-------
 airline-business-service
+------------------------
 http://localhost:8085/swagger-ui.html
 http://192.168.99.100:8085/swagger-ui.html (when using docker)
+
 airline-data-service
+--------------------
 http://localhost:8090/swagger-ui.html
 http://192.168.99.100:8090/swagger-ui.html(when using docker)
 
 Eureka Server:
+--------------
 http://localhost:8761/
 http://192.168.99.100:8761/ (when using docker)
 
 airline-business-service
+------------------------
 1. http://localhost:8085/shortestTime
 http://192.168.99.100:8085/shortestTime(when using docker)
 
@@ -114,6 +129,7 @@ Sample Response:
 }
 
 airline-data-service
+--------------------
 1. http://localhost:8090/airlines
 http://192.168.99.100:8090/airlines (when using docker)
 GET API
