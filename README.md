@@ -47,9 +47,13 @@ Build containers using docker command
 -------------------------------------
 
 docker build -t adidas/config-service:1.0.0 ./config-service
+
 docker build -t adidas/eureka-server:1.0.0 ./eureka-server
+
 docker build -t adidas/airline-data-service:1.0.0 ./airline-data-service
+
 docker build -t adidas/airline-business-service:1.0.0 ./airline-business-service
+
 docker build -t mysql-database ./mysql-database
 
 
@@ -60,12 +64,16 @@ docker-compose up --no-start
 Start containers in sequence
 ----------------------------
 
-docker start -a config-service    
-docker start -a eureka-server
-docker start -a mysql-database
-docker start -a airline-data-service
-docker start -a airline-business-service
+docker start -a config-service 
 
+docker start -a eureka-server
+
+docker start -a mysql-database
+
+docker start -a airline-data-service
+
+docker start -a airline-business-service
+_____________________________________________________________________________________________________
 
 
 Prior to testing with docker containers I have tested by running each microservice through eclipe by running following classes in sequence and have configured mysql on local.
@@ -152,6 +160,7 @@ http://192.168.99.100:8090/airlines (when using docker)
 
 GET API
 
+Sample Response:  
 [
     {
         "id": 1,
