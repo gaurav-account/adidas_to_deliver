@@ -1,0 +1,48 @@
+version: "3"
+services:
+ # mysql-database
+  mysql-database:
+    container_name: mysql-database
+    image: mysql-database
+    ports:
+        - "3307:3307"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: adidas
+
+  # Config-service
+  config-service:
+    container_name: config-service
+    image: adidas/config-service:1.0.0
+    expose:
+      - "8888"
+
+  # Eureka-server
+  eureka-server:
+    container_name: eureka-server
+    image: adidas/eureka-server:1.0.0
+    environment:
+      SPRING_CONFIG_URI: "http://config-service:8888"
+    ports:
+      - "8761:8761"
+
+  # airline-data-service
+  airline-data-service:
+    container_name: airline-data-service
+    image: adidas/airline-data-service:1.0.0
+    environment:
+      SPRING_CONFIG_URI: "http://config-service:8888"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+      MYSQL_HOST: "mysql-database"
+    ports:
+      - "8090:8090"
+# airline-business-service
+  airline-business-service:
+    container_name: airline-business-service
+    image: adidas/airline-business-service:1.0.0
+    environment:
+      SPRING_CONFIG_URI: "http://config-service:8888"
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+    ports:
+      - "8085:8085"
