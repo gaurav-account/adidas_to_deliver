@@ -152,7 +152,7 @@ STEP 2:Add Generated JWT token to header
  ---------------------------
 
 
-http://192.168.99.100:8080/shortestConnection  
+http://192.168.99.100:8080/airlines/shortestConnection
 
 POST API
 -------
