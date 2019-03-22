@@ -117,7 +117,7 @@ Eureka Server:
 http://192.168.99.100:8761/ 
 
 
-Hysttrix:
+Hystrix:
 --------
 
 http://192.168.99.100:8080/hystrix
