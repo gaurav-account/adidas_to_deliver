@@ -162,7 +162,7 @@ Sample request:
 
 {
     "originCity": "Delhi",
-    "destinyCity": "Kolkata"
+    "destinyCity": "Chennai"
 }
 
 
@@ -173,6 +173,6 @@ Sample Response:
     "path": [
         "Delhi",
         "Mumbai",
-        "Kolkata"
+        "Chennai"
     ]
 }
