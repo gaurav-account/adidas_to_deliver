@@ -117,7 +117,7 @@ Eureka Server:
 http://192.168.99.100:8761/ 
 
 
-Hysttrix:
+Hystrix:
 --------
 
 http://192.168.99.100:8080/hystrix
@@ -125,7 +125,7 @@ http://192.168.99.100:8080/hystrix
 http://192.168.99.100:8080/airlines/actuator/hystrix.stream
 
 
-STEP 1:Generate JWT Token
+STEP 1: Generate JWT Token
 ------------------------
 
 http://192.168.99.100:8080/login 
@@ -141,9 +141,11 @@ Sample request:
 
 
 
-STEP 2:Add Generated JWT token to header
----------------------------------------
+STEP 2: Add Generated JWT token to header
+-----------------------------------------
+
  e.g. Key = Authorization
+ 
       Value = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGlkYXMiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTUzMjI4MTk2LCJleHAiOjE1NTMzMTQ1OTZ9.IA8TgS6e3sgHAc1gpVCxlF-no50d7iVX01S_4Zx0c4E
       
       
@@ -152,7 +154,7 @@ STEP 2:Add Generated JWT token to header
  ---------------------------
 
 
-http://192.168.99.100:8080/airlines/shortestConnection
+i) http://192.168.99.100:8080/airlines/shortestConnection
 
 POST API
 -------
@@ -173,6 +175,35 @@ Sample Response:
     "path": [
         "Delhi",
         "Mumbai",
+        "Chennai"
+    ]
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+ii) http://192.168.99.100:8080/airlines/shortestTime
+
+POST API
+-------
+
+Sample request:
+---------------
+
+{
+    "originCity": "Delhi",
+    "destinyCity": "Chennai"
+}
+
+
+Sample Response:
+---------------
+
+{
+    "path": [
+        "Delhi",
+        "Bangalore",
         "Chennai"
     ]
 }
