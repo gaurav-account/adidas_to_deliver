@@ -5,20 +5,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-import org.joda.time.Minutes;
 import org.springframework.stereotype.Service;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 import com.adidas.consumer.exceptions.InvalidDataException;
 import com.adidas.consumer.model.Airline;
 import com.adidas.consumer.model.ShortestConnectionsResponse;
@@ -125,7 +120,7 @@ public class JgraphtServiceImpl implements JgraphtService {
 	}
 	
     private Function<Airline, Long> quickestRoute()  {
-        return (Airline airline) -> calculateTimeDifference(airline.getDepartureTime(), airline.getArrivalTime());
+        return (Airline airline) -> calculateTimeDifferenceLocalTime(airline.getDepartureTime(), airline.getArrivalTime());
     }
 
     private Function<Airline, Long> shortestRoute() {
