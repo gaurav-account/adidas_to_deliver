@@ -45,6 +45,14 @@ The solution has following modules:
 
 	mysql database service.
 	
+6. auth-service: 
+	
+	It is authorization service using JWT.
+		
+7. gateway-service: 
+
+	It is entrypoint to this application. 
+	
 
 Steps to run the application
 --------------------------------
