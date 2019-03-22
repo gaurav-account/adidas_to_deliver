@@ -106,13 +106,14 @@ http://192.168.99.100:8080/swagger-ui.html
 Eureka Server:
 --------------
 
-http://192.168.99.100:8761/ (when using docker)
+http://192.168.99.100:8761/ 
 
 
 Hysttrix:
 --------
 
 http://192.168.99.100:8080/hystrix
+
 http://192.168.99.100:8080/airlines/actuator/hystrix.stream
 
 
