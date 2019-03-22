@@ -1,6 +1,7 @@
 package com.adidas.consumer.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,14 +10,16 @@ import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.springframework.stereotype.Service;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import com.adidas.consumer.exceptions.InvalidDataException;
 import com.adidas.consumer.model.Airline;
 import com.adidas.consumer.model.ShortestConnectionsResponse;
 import com.adidas.consumer.model.ShortestTimeResponse;
+
+
 import java.util.function.Function;
+
 
 /**
  * Implementation class for jgrapht service. Using BellmanFordShortestPath algorithm
@@ -119,15 +122,19 @@ public class JgraphtServiceImpl implements JgraphtService {
     
     private long calculateTimeDifference(String departureTime, String arrivalTime) {
 
-        	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        	LocalDateTime dep = LocalDateTime.parse(departureTime, formatter);
-        	LocalDateTime arr = LocalDateTime.parse(arrivalTime, formatter);
-        	
-        	if(arr.isBefore(dep)){
-        		arr = arr.plusDays(1);
-        	}
-        	Duration duration = Duration.between(dep, arr);
-        	return duration.toMillis();
+    	 try {
+             DateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+             Date departure = simpleDateFormat.parse(departureTime);
+             Date arrival = simpleDateFormat.parse(arrivalTime);
+             if (arrival.before(departure)) {
+                 arrival.setTime(arrival.getTime() + 24*60*60*1000);
+             }
+
+             return arrival.getTime() - departure.getTime();
+
+         } catch (java.text.ParseException e) {
+        	 throw new InvalidDataException("Error occured while calculating time difference");
+         }
         
     }
     
