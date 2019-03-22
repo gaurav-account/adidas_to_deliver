@@ -58,7 +58,11 @@ Build containers using docker command
 
 docker build -t adidas/config-service:1.0.0 ./config-service
 
+docker build -t adidas/gateway-service:1.0.0 ./gateway-service
+
 docker build -t adidas/eureka-server:1.0.0 ./eureka-server
+
+docker build -t adidas/auth-service:1.0.0 ./auth-service
 
 docker build -t adidas/airline-data-service:1.0.0 ./airline-data-service
 
@@ -74,53 +78,48 @@ docker-compose up --no-start
 Start containers in sequence
 ----------------------------
 
-docker start -a config-service 
+docker start -a config-service   
 
 docker start -a eureka-server
+
+docker start -a auth-service
 
 docker start -a mysql-database
 
 docker start -a airline-data-service
 
 docker start -a airline-business-service
+
+docker start -a gateway-service
+
 _____________________________________________________________________________________________________
 
 
-Prior to testing with docker containers I have tested by running each microservice through eclipe by running following classes in sequence and have configured mysql on local.
-1. ConfigServiceApplication.java(config-service)
-2. EurekaServerApplication.java(eureka-server)
-3. AirlineDataServiceApplication.java(airline-data-service)
-4. AirlineBusinessServiceApplication.java(airline-business-service)
 
 URLs of the Application:
 ------------------------
 Swagger:
 -------
-airline-business-service
-------------------------
-http://localhost:8085/swagger-ui.html  
-
-http://192.168.99.100:8085/swagger-ui.html (when using docker)
-
-
-airline-data-service
---------------------
-http://localhost:8090/swagger-ui.html  
-
-http://192.168.99.100:8090/swagger-ui.html  (when using docker)
+http://192.168.99.100:8080/swagger-ui.html
 
 
 Eureka Server:
 --------------
-http://localhost:8761/  
 
-http://192.168.99.100:8761/   (when using docker)
+http://192.168.99.100:8761/ (when using docker)
 
-airline-business-service
+
+Hysttrix:
+--------
+
+http://192.168.99.100:8080/hystrix
+http://192.168.99.100:8080/airlines/actuator/hystrix.stream
+
+
+STEP 1:Generate JWT Token
 ------------------------
-1. http://localhost:8085/shortestTime  
 
-http://192.168.99.100:8085/shortestTime  (when using docker)
+http://192.168.99.100:8080/login 
 
 
 POST API
@@ -129,26 +128,22 @@ POST API
 Sample request:
 ---------------
 
-{
-    "originCity": "Delhi",
-    "destinyCity": "Chennai"
-}
-
-Sample Response:
-----------------
-
-{
-    "path": [
-        "Delhi",
-        "Mumbai",
-        "Chennai"
-    ]
-}
+{"username":"adidas","password":"adidas"}
 
 
-2. http://localhost:8085/shortestConnection  
 
-http://192.168.99.100:8085/shortestConnection  (when using docker)
+STEP 2:Add Generated JWT token to header
+---------------------------------------
+ e.g. Key = Authorization
+      Value = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGlkYXMiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTUzMjI4MTk2LCJleHAiOjE1NTMzMTQ1OTZ9.IA8TgS6e3sgHAc1gpVCxlF-no50d7iVX01S_4Zx0c4E
+      
+      
+ 
+ STEP 3: Execute the request
+ ---------------------------
+
+
+http://192.168.99.100:8085/shortestConnection  
 
 POST API
 -------
@@ -172,90 +167,3 @@ Sample Response:
         "Kolkata"
     ]
 }
-
-airline-data-service
---------------------
-
-1. http://localhost:8090/airlines  
-
-http://192.168.99.100:8090/airlines (when using docker)
-
-GET API
--------
-
-Sample Response: 
-----------------
-
-[
-    {
-        "id": 1,
-        "originCity": "Delhi",
-        "destinyCity": "Mumbai",
-        "departureTime": "10:40",
-        "arrivalTime": "12:15"
-    },
-    {
-        "id": 2,
-        "originCity": "Delhi",
-        "destinyCity": "Bangalore",
-        "departureTime": "11:00",
-        "arrivalTime": "19:30"
-    },
-    {
-        "id": 3,
-        "originCity": "Mumbai",
-        "destinyCity": "Delhi",
-        "departureTime": "09:15",
-        "arrivalTime": "18:25"
-    },
-    {
-        "id": 4,
-        "originCity": "Mumbai",
-        "destinyCity": "Bangalore",
-        "departureTime": "11:00",
-        "arrivalTime": "16:30"
-    },
-    {
-        "id": 5,
-        "originCity": "Mumbai",
-        "destinyCity": "Chennai",
-        "departureTime": "11:30",
-        "arrivalTime": "15:30"
-    },
-    {
-        "id": 6,
-        "originCity": "Mumbai",
-        "destinyCity": "Kolkata",
-        "departureTime": "11:15",
-        "arrivalTime": "16:55"
-    },
-    {
-        "id": 7,
-        "originCity": "Chennai",
-        "destinyCity": "Mumbai",
-        "departureTime": "01:40",
-        "arrivalTime": "05:30"
-    },
-    {
-        "id": 8,
-        "originCity": "Bangalore",
-        "destinyCity": "Chennai",
-        "departureTime": "10:00",
-        "arrivalTime": "19:00"
-    },
-    {
-        "id": 9,
-        "originCity": "Bangalore",
-        "destinyCity": "Mumbai",
-        "departureTime": "23:30",
-        "arrivalTime": "08:20"
-    },
-    {
-        "id": 10,
-        "originCity": "Bangalore",
-        "destinyCity": "Kolkata",
-        "departureTime": "07:15",
-        "arrivalTime": "18:30"
-    }
-]
-
