@@ -125,7 +125,7 @@ http://192.168.99.100:8080/hystrix
 http://192.168.99.100:8080/airlines/actuator/hystrix.stream
 
 
-STEP 1:Generate JWT Token
+STEP 1: Generate JWT Token
 ------------------------
 
 http://192.168.99.100:8080/login 
