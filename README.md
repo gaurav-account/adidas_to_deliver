@@ -141,9 +141,11 @@ Sample request:
 
 
 
-STEP 2:Add Generated JWT token to header
----------------------------------------
+STEP 2: Add Generated JWT token to header
+-----------------------------------------
+
  e.g. Key = Authorization
+ 
       Value = Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZGlkYXMiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTUzMjI4MTk2LCJleHAiOjE1NTMzMTQ1OTZ9.IA8TgS6e3sgHAc1gpVCxlF-no50d7iVX01S_4Zx0c4E
       
       
