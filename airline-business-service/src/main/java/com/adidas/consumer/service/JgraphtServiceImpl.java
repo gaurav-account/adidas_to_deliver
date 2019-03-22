@@ -5,17 +5,29 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.BellmanFordShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
+import org.joda.time.Minutes;
 import org.springframework.stereotype.Service;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import com.adidas.consumer.exceptions.InvalidDataException;
 import com.adidas.consumer.model.Airline;
 import com.adidas.consumer.model.ShortestConnectionsResponse;
 import com.adidas.consumer.model.ShortestTimeResponse;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
+
+
+
 
 
 import java.util.function.Function;
@@ -137,5 +149,19 @@ public class JgraphtServiceImpl implements JgraphtService {
          }
         
     }
+    
+    private long calculateTimeDifferenceLocalTime(String departureTime, String arrivalTime) {
+
+    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    	LocalTime dep = LocalTime.parse(departureTime, formatter);
+    	LocalTime arr = LocalTime.parse(arrivalTime, formatter);
+    	
+    	long difference = MINUTES.between(arr, dep);
+    	if (difference < 0) {
+    		difference += 1440;
+    	}
+    	return difference;
+       
+   }
     
 }
