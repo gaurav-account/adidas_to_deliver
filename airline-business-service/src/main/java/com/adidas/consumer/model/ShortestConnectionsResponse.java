@@ -2,6 +2,11 @@ package com.adidas.consumer.model;
 
 import java.util.List;
 
+/**
+ * POJO class for Response with shortest connection.
+ * @author Gaurav Kumar
+ *
+ */
 public class ShortestConnectionsResponse {
 	private List<String> path;
 

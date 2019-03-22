@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+zuul:
+  routes:
+    auth-center:
+      path: /login/**
+      url: http://${AUTH_SERVER:localhost}:8081/
+      sensitiveHeaders: Cookie,Set-Cookie
+      stripPrefix: false
+    airline-business-service:
+      path: /airlines/**
+      url: http://${AIRLINE_BUSINESS_SERVICE:localhost}:8085/
+
+adidas.security.jwt.secret: adidas
+
+eureka:
+  instance:
+    preferIpAddress: true

@@ -14,6 +14,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * Main class for Airline Data Service.
+ * @author Gaurav Kumar
+ *
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
@@ -23,7 +28,11 @@ public class AirlineDataServiceApplication {
 		SpringApplication.run(AirlineDataServiceApplication.class, args);
 	}
 	
-	 @Bean
+	 /**
+	  * Method for swagger.
+	 * @return Docket
+	 */
+	@Bean
 	 public Docket api() {
 	        return new Docket(DocumentationType.SWAGGER_2)
 	                .apiInfo(getApiInfo())
@@ -35,10 +44,9 @@ public class AirlineDataServiceApplication {
 
 	 
 	private ApiInfo getApiInfo() {
-		ApiInfo apiInfo = new ApiInfoBuilder()
+		return new ApiInfoBuilder()
 		        .description("This service expose all flights data")
 		       .build();
-		return apiInfo;
 	}
 
 }

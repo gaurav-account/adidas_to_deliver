@@ -2,6 +2,11 @@ package com.adidas.consumer.model;
 
 import java.util.List;
 
+/**
+ * POJO class for response with shortest time.
+ * @author Gaurav Kumar
+ *
+ */
 public class ShortestTimeResponse {
 	
 	private List<String> path;

@@ -2,6 +2,11 @@ package com.adidas.consumer.model;
 
 import io.swagger.annotations.ApiModel;
 
+/**
+ * POJO class for Airline data.
+ * @author Gaurav Kumar
+ *
+ */
 @ApiModel
 public class Airline {
     private int id;

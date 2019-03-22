@@ -2,6 +2,11 @@ package com.adidas.consumer.model;
 
 import io.swagger.annotations.ApiModel;
 
+/**
+ * Pojo Class for request DTO.
+ * @author Gaurav Kumar
+ *
+ */
 @ApiModel
 public class AirlineRequest {
 
